@@ -173,11 +173,11 @@ namespace Discord
         {
             if (filters == null)
                 filters = new MessageFilters();
-
+            
             const int messagesPerRequest = 100;
-
+            
             var messages = new List<DiscordMessage>();
-
+            
             while (true)
             {
                 string parameters = "";
@@ -189,18 +189,19 @@ namespace Discord
                 if (filters.MentioningUserId.HasValue) parameters += $"mentions={filters.MentioningUserId}&";
                 if (filters.Has.HasValue) parameters += $"has={filters.Has.ToString().ToLower()}&";
                 if (!string.IsNullOrEmpty(filters.Content)) parameters += $"content={filters.Content}";
-
+            
+                var test = await client.HttpClient.GetAsync($"/channels/{channelId}/messages?{parameters}");
                 var newMessages = (await client.HttpClient.GetAsync($"/channels/{channelId}/messages?{parameters}"))
                                                           .Deserialize<IReadOnlyList<DiscordMessage>>().SetClientsInList(client);
-
-                messages.AddRange(newMessages);
-
-                filters.BeforeId = messages.Last().Id;
-
+            
+                messages.AddRange(newMessages.OrderBy(x => x.SentAt));
+            
+                filters.AfterId = messages.Last().Id;
+            
                 if (newMessages.Count < messagesPerRequest)
                     break;
             }
-
+            
             return messages;
         }
 
