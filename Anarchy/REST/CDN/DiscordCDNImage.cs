@@ -14,7 +14,8 @@ namespace Discord
         {
             Url = "https://cdn.discordapp.com/" + string.Format(endpoint.Template, assets);
             Particles = assets;
-            AllowedFormats = endpoint.AllowedFormats;
+
+            AllowedFormats = endpoint.AllowedFormats.Distinct().ToList();
         }
 
         public DiscordImage Download(DiscordCDNImageFormat format = DiscordCDNImageFormat.Any)
@@ -28,6 +29,18 @@ namespace Discord
                 url += "." + format.ToString().ToLower();
 
             return DiscordImageSource.FromUrl(url).Result;
+        }
+
+        public string GetUrl(DiscordCDNImageFormat format = DiscordCDNImageFormat.Any)
+        {
+            if (format != DiscordCDNImageFormat.Any && !AllowedFormats.Contains(format))
+                throw new NotSupportedException("Image format not supported. The supported formats for this endpoint are: " + string.Join(", ", AllowedFormats));
+
+            string url = Url;
+
+            if (format != DiscordCDNImageFormat.Any)
+                url += "." + format.ToString().ToLower();
+            return url;
         }
     }
 }
