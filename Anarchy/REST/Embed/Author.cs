@@ -12,6 +12,7 @@ namespace Discord
             get { return _name; }
             set
             {
+                if (value == null) return;
                 if (value.Length > 256)
                     throw new EmbedException(EmbedError.AuthorNameToolong);
 

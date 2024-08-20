@@ -12,6 +12,7 @@ namespace Discord
             get { return _text; }
             set
             {
+                if (value == null) return;
                 if (value.Length > 2048)
                     throw new EmbedException(EmbedError.FooterTextTooLong);
 

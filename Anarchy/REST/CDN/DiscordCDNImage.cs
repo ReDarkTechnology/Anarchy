@@ -31,6 +31,22 @@ namespace Discord
             return DiscordImageSource.FromUrl(url).Result;
         }
 
+        public DiscordImage Download(DiscordCDNImageFormat format, int size)
+        {
+            if (format != DiscordCDNImageFormat.Any && !AllowedFormats.Contains(format))
+                throw new NotSupportedException("Image format not supported. The supported formats for this endpoint are: " + string.Join(", ", AllowedFormats));
+
+            string url = Url;
+
+            if (format != DiscordCDNImageFormat.Any)
+                url += "." + format.ToString().ToLower();
+
+            if (size > 32)
+                url += "?size=" + size;
+
+            return DiscordImageSource.FromUrl(url).Result;
+        }
+
         public string GetUrl(DiscordCDNImageFormat format = DiscordCDNImageFormat.Any)
         {
             if (format != DiscordCDNImageFormat.Any && !AllowedFormats.Contains(format))
@@ -40,6 +56,22 @@ namespace Discord
 
             if (format != DiscordCDNImageFormat.Any)
                 url += "." + format.ToString().ToLower();
+            return url;
+        }
+
+        public string GetUrl(DiscordCDNImageFormat format, int size)
+        {
+            if (format != DiscordCDNImageFormat.Any && !AllowedFormats.Contains(format))
+                throw new NotSupportedException("Image format not supported. The supported formats for this endpoint are: " + string.Join(", ", AllowedFormats));
+
+            string url = Url;
+
+            if (format != DiscordCDNImageFormat.Any)
+                url += "." + format.ToString().ToLower();
+
+            if (size > 32)
+                url += "?size=" + size;
+
             return url;
         }
     }
