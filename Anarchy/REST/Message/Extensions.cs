@@ -195,8 +195,15 @@ namespace Discord
                                                           .Deserialize<IReadOnlyList<DiscordMessage>>().SetClientsInList(client);
             
                 messages.AddRange(newMessages.OrderBy(x => x.SentAt));
-            
-                filters.AfterId = messages.Last().Id;
+
+                if (messages.Count > 0)
+                {
+                    filters.AfterId = messages.Last().Id;
+                }
+                else
+                {
+                    filters.AfterId = null;
+                }
             
                 if (newMessages.Count < messagesPerRequest)
                     break;

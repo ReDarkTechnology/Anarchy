@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -1098,6 +1099,9 @@ namespace Discord.Gateway
                                 if (OnThreadMembersUpdated != null)
                                     Task.Run(() => OnThreadMembersUpdated.Invoke(this, ev));
                             }
+                            break;
+                        default:
+                            Console.WriteLine($"Unknown message event type: {message.EventName}");
                             break;
                     }
                     break;
