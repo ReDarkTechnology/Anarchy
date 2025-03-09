@@ -4,15 +4,15 @@ using System.Linq;
 
 namespace Discord
 {
-    public class DiscordCDNImage
+    public class DiscordMediaImage
     {
         public string Url { get; private set; }
         public object[] Particles { get; private set; }
         public IReadOnlyList<DiscordImageFormat> AllowedFormats { get; private set; }
 
-        public DiscordCDNImage(CDNEndpoint endpoint, params object[] assets)
+        public DiscordMediaImage(MediaEndpoint endpoint, params object[] assets)
         {
-            Url = "https://cdn.discordapp.com/" + string.Format(endpoint.Template, assets);
+            Url = $"https://{endpoint.Host}/{string.Format(endpoint.Template, assets)})";
             Particles = assets;
 
             AllowedFormats = endpoint.AllowedFormats.Distinct().ToList();

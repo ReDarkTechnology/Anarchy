@@ -4,19 +4,19 @@ namespace Discord
 {
     internal static class CDNEndpoints
     {
-        public static List<DiscordCDNImageFormat> CommonFormats = new List<DiscordCDNImageFormat>()
+        public static List<DiscordImageFormat> CommonFormats = new List<DiscordImageFormat>()
         {
-            DiscordCDNImageFormat.PNG,
-            DiscordCDNImageFormat.JPG,
-            DiscordCDNImageFormat.WebP
+            DiscordImageFormat.PNG,
+            DiscordImageFormat.JPG,
+            DiscordImageFormat.WebP
         };
 
-        public static List<DiscordCDNImageFormat> AllFormats = new List<DiscordCDNImageFormat>()
+        public static List<DiscordImageFormat> AllFormats = new List<DiscordImageFormat>()
         {
-            DiscordCDNImageFormat.PNG,
-            DiscordCDNImageFormat.JPG,
-            DiscordCDNImageFormat.WebP,
-            DiscordCDNImageFormat.GIF
+            DiscordImageFormat.PNG,
+            DiscordImageFormat.JPG,
+            DiscordImageFormat.WebP,
+            DiscordImageFormat.GIF
         };
 
         // Applications
@@ -29,15 +29,15 @@ namespace Discord
         public static readonly CDNEndpoint Banner = new CDNEndpoint("banners/{0}/{1}", CommonFormats);
         public static readonly CDNEndpoint Splash = new CDNEndpoint("splashes/{0}/{1}", CommonFormats);
         public static readonly CDNEndpoint DiscoverySplash = new CDNEndpoint("discovery-splashes/{0}/{1}", CommonFormats);
-        public static readonly CDNEndpoint Emoji = new CDNEndpoint("emojis/{0}", new List<DiscordCDNImageFormat>()
+        public static readonly CDNEndpoint Emoji = new CDNEndpoint("emojis/{0}", new List<DiscordImageFormat>()
         {
-            DiscordCDNImageFormat.PNG,
-            DiscordCDNImageFormat.GIF
+            DiscordImageFormat.PNG,
+            DiscordImageFormat.GIF
         });
 
         // Private
         public static readonly CDNEndpoint ChannelIcon = new CDNEndpoint("channel-icons/{0}/{1}", CommonFormats);
         public static readonly CDNEndpoint Avatar = new CDNEndpoint("avatars/{0}/{1}", AllFormats);
-        public static readonly CDNEndpoint DefaultAvatar = new CDNEndpoint("embed/avatars/{0}", new List<DiscordCDNImageFormat>() { DiscordCDNImageFormat.PNG });
+        public static readonly CDNEndpoint DefaultAvatar = new CDNEndpoint("embed/avatars/{0}", new List<DiscordImageFormat>() { DiscordImageFormat.PNG });
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace Discord
 {
-    public enum DiscordCDNImageFormat
+    public enum DiscordImageFormat
     {
         Any,
         JPG,

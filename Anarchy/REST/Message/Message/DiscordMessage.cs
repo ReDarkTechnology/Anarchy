@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Anarchy.REST.Stickers.Models;
 using Newtonsoft.Json;
 
 namespace Discord
