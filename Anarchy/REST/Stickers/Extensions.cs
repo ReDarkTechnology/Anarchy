@@ -19,10 +19,8 @@ namespace Discord
         /// Gets the guild's stickers
         /// </summary>
         /// <param name="guildId">ID of the guild</param>
-        public static IReadOnlyList<DiscordSticker> GetGuildStickers(this DiscordClient client, ulong guildId)
-        {
-            return client.GetGuildStickersAsync(guildId).GetAwaiter().GetResult();
-        }
+        public static IReadOnlyList<DiscordSticker> GetGuildStickers(this DiscordClient client, ulong guildId) =>
+            client.GetGuildStickersAsync(guildId).ToSync();
 
         public static async Task<DiscordSticker> GetStickerAsync(this DiscordClient client, ulong stickerId)
         {
@@ -36,10 +34,8 @@ namespace Discord
         /// </summary>
         /// <param name="guildId">ID of the guild</param>
         /// <param name="stickerId">ID of the sticker</param>
-        public static DiscordSticker GetGuildSticker(this DiscordClient client, ulong stickerId)
-        {
-            return client.GetStickerAsync(stickerId).GetAwaiter().GetResult();
-        }
+        public static DiscordSticker GetGuildSticker(this DiscordClient client, ulong stickerId) =>
+            client.GetStickerAsync(stickerId).ToSync();
         #endregion
     }
 }
